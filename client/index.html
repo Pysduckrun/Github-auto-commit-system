@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-fit, initial-scale=1.0">
+    <title>GitHub Daily Fork & Learning Hub</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <a href="#" class="nav-brand">
+            <!-- Official GitHub SVG Logo -->
+            <svg class="gh-logo" height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true">
+                <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.2-.07-.39-.2-.55 2.24-.24 4.04-.9 4.04-4.39 0-.97-.35-1.77-.92-2.39.09-.23.4-.113.92-.09 0 0 .75.24 2.45 1.4.71-.2 1.47-.3 2.24-.3.77 0 1.53.1 2.24.3 1.7-1.16 2.45-1.4 2.45-1.4.52.87.18 1.66.09 1.89.57.62.92 1.42.92 2.39 0 3.49-1.8 4.14-4.04 4.38.2.18.39.54.39 1.1 0 .79-.01 1.43-.01 1.63 0 .21-.15.46-.55.38A8.013 8.013 0 0 1 16 8c0-4.42-3.58-8-8-8Z"></path>
+            </svg>
+            <span>Auto-Commit Learning Hub</span>
+            <span class="brand-badge">Pro</span>
+        </a>
+
+        <div class="nav-actions">
+            <div class="status-indicator" id="auth-status" title="GitHub API Connection Status">
+                <span class="status-dot" id="status-dot"></span>
+                <span id="status-text">Checking GitHub...</span>
+            </div>
+            <button class="btn-secondary" id="btn-history">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M1.5 8a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0ZM8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0Zm.5 4.75a.75.75 0 0 0-1.5 0v3.5c0 .214.09.418.247.556l2.25 2a.75.75 0 0 0 1.006-1.112L8.5 7.938V4.75Z"></path>
+                </svg>
+                My Learning Log
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="hero">
+        <h1>What technology do you want to <span>master</span>?</h1>
+        <p>Discover high-quality, top-starred GitHub repositories tailored to your exact learning goals. Preview architecture & READMEs instantly, then commit them directly to your personal GitHub workspace.</p>
+
+        <!-- Search & Topic Selector Card -->
+        <div class="search-container">
+            <form id="search-form" class="search-input-group" onsubmit="event.preventDefault(); triggerSearch();">
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"></path>
+                    </svg>
+                    <input type="text" id="topic-input" class="search-input" placeholder="Enter any topic or tech stack (e.g., machine-learning, fastapi, rust, docker)..." value="machine-learning" required>
+                </div>
+                <button type="submit" class="btn-primary" id="btn-search">
+                    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path>
+                    </svg>
+                    Explore Repos
+                </button>
+            </form>
+
+            <div class="topics-label">Quick Trending Topics:</div>
+            <div class="topic-pills" id="topic-pills">
+                <span class="topic-pill active" onclick="selectTopic('machine-learning')">🤖 machine-learning</span>
+                <span class="topic-pill" onclick="selectTopic('fastapi')">⚡ fastapi</span>
+                <span class="topic-pill" onclick="selectTopic('python')">🐍 python</span>
+                <span class="topic-pill" onclick="selectTopic('deep-learning')">🧠 deep-learning</span>
+                <span class="topic-pill" onclick="selectTopic('mlops')">🛠️ mlops</span>
+                <span class="topic-pill" onclick="selectTopic('docker')">🐳 docker</span>
+                <span class="topic-pill" onclick="selectTopic('data-science')">📊 data-science</span>
+                <span class="topic-pill" onclick="selectTopic('react')">⚛️ react</span>
+                <span class="topic-pill" onclick="selectTopic('rust')">🦀 rust</span>
+                <span class="topic-pill" onclick="selectTopic('genai')">✨ genai</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filter & Sort Bar -->
+    <div class="filters-bar">
+        <div class="results-stats" id="results-stats">
+            Ready to explore high quality repositories.
+        </div>
+        <div class="filter-controls">
+            <div class="filter-group">
+                <label for="min-stars">Min Quality:</label>
+                <select id="min-stars" class="filter-select" onchange="triggerSearch()">
+                    <option value="50">50+ Stars</option>
+                    <option value="100" selected>100+ Stars (Standard)</option>
+                    <option value="500">500+ Stars (High Quality)</option>
+                    <option value="1000">1,000+ Stars (Top Tier)</option>
+                    <option value="5000">5,000+ Stars (Legendary)</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="sort-by">Sort By:</label>
+                <select id="sort-by" class="filter-select" onchange="triggerSearch()">
+                    <option value="stars">Most Stars ⭐</option>
+                    <option value="forks">Most Forks 🍴</option>
+                    <option value="updated">Recently Updated 🕒</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Repository Grid -->
+    <main class="repo-grid" id="repo-grid">
+        <div class="empty-state">
+            <div class="spinner"></div>
+            <p>Fetching top trending repositories...</p>
+        </div>
+    </main>
+
+    <!-- Repository Preview Drawer / Modal -->
+    <div class="modal-overlay" id="preview-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title-box">
+                    <img id="preview-avatar" class="modal-avatar" src="" alt="Owner Avatar">
+                    <div class="modal-title">
+                        <h2 id="preview-title">Repository Title</h2>
+                        <a id="preview-external-link" href="#" target="_blank" rel="noopener noreferrer">View directly on GitHub ↗</a>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closePreviewModal()">✕</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-tabs">
+                    <button class="modal-tab active" onclick="switchTab('readme', this)">README Preview</button>
+                    <button class="modal-tab" onclick="switchTab('stats', this)">Languages & Architecture</button>
+                </div>
+
+                <div id="tab-readme">
+                    <div id="readme-box" class="readme-preview">Loading README excerpt...</div>
+                </div>
+
+                <div id="tab-stats" style="display: none;">
+                    <h4 style="margin-bottom: 8px; color: #fff;">Language Distribution</h4>
+                    <div id="lang-progress" class="lang-bar"></div>
+                    <ul id="lang-list" class="lang-list"></ul>
+
+                    <h4 style="margin: 24px 0 8px; color: #fff;">Repository Metrics</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: var(--gh-bg); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--gh-border);">
+                        <div>
+                            <span style="color: var(--gh-text-muted); font-size: 0.8rem;">Stars</span>
+                            <div id="stat-stars" style="font-size: 1.25rem; font-weight: 700; color: #fff;">0</div>
+                        </div>
+                        <div>
+                            <span style="color: var(--gh-text-muted); font-size: 0.8rem;">Forks</span>
+                            <div id="stat-forks" style="font-size: 1.25rem; font-weight: 700; color: #fff;">0</div>
+                        </div>
+                        <div>
+                            <span style="color: var(--gh-text-muted); font-size: 0.8rem;">Open Issues</span>
+                            <div id="stat-issues" style="font-size: 1.25rem; font-weight: 700; color: #fff;">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="learning-prompt">
+                    <strong>💡 Ready to commit this repo?</strong> Forking adds this directly to your GitHub workspace for experimentation.
+                </div>
+                <button id="btn-modal-fork" class="btn-primary" onclick="forkCurrentPreviewRepo()">
+                    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path>
+                    </svg>
+                    Fork / Commit to My GitHub
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning History Drawer / Modal -->
+    <div class="modal-overlay" id="history-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title-box">
+                    <div class="modal-title">
+                        <h2>📚 My Committed Learning Repositories</h2>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeHistoryModal()">✕</button>
+            </div>
+            <div class="modal-body" id="history-list-container">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="src/script.js"></script>
+</body>
+</html>

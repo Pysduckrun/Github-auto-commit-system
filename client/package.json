@@ -1,0 +1,21 @@
+{
+  "name": "github-learning-hub-client",
+  "version": "1.0.0",
+  "description": "Frontend web application interface for GitHub Learning & Auto-Commit Hub",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve . -p 3000",
+    "dev": "npx live-server --port=3000"
+  },
+  "keywords": [
+    "github",
+    "learning",
+    "automation",
+    "repos",
+    "vanillajs",
+    "css3"
+  ],
+  "author": "Abhinav Sharma",
+  "license": "MIT",
+  "dependencies": {}
+}
